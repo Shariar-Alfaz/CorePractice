@@ -37,5 +37,3 @@ problems/
 Feel free to fork, clone, and solve problems in your preferred language. Create pull requests for improvements or new solutions.
 
 ---
-
-Let me know if you want a README template, badges, or a starter folder structure too.
