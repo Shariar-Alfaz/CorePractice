@@ -1,0 +1,94 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg-info/
+.eggs/
+*.env
+.env
+.venv/
+venv/
+env/
+*.ipynb_checkpoints
+.DS_Store
+
+# ==========================
+# Java
+# ==========================
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iml
+target/
+out/
+.idea/
+*.iws
+*.ipr
+*.class
+*.project
+*.classpath
+
+# ==========================
+# C++
+# ==========================
+*.exe
+*.out
+*.o
+*.obj
+*.gch
+*.log
+*.a
+*.so
+*.dll
+*.dSYM/
+build/
+cmake-build-*/
+
+# ==========================
+# C#
+# ==========================
+*.exe
+*.dll
+*.pdb
+*.cache
+*.db
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsp
+*.vspscc
+*.vssscc
+*.ncb
+*.sdf
+*.opensdf
+*.VC.db
+.vscode/
+*.csproj.user
+bin/
+obj/
+TestResults/
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.nuget.props
+
+# ==========================
+# System Files
+# ==========================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.tmp
+*.bak
+
+# ==========================
+# Git
+# ==========================
+*.orig
