@@ -138,3 +138,29 @@ class SinglyLinkedList:
             else:
                 print(current_node.data, end=" -> ")
             current_node = current_node.next
+
+    #Suppose the digits are stored in forward order. Repeat the above problem.
+    @staticmethod
+    def sum_lists_forward(l1:SinglyNode, l2:SinglyNode)-> SinglyNode:
+        num1:str = ""
+        num2:str = ""
+        while l1 or l2:
+            if l1:
+                num1 += str(l1.data)
+                l1 = l1.next
+            if l2:
+                num2 += str(l2.data)
+                l2 = l2.next
+        sum = int(num1) + int(num2)
+        dummy_head = SinglyNode(0)
+        current = dummy_head
+        result = list()
+        while sum > 0:
+            result.append(sum % 10)
+            sum //= 10
+        result.reverse()
+        for i in result:
+            current.next = SinglyNode(i)
+            current = current.next
+        return dummy_head.next
+        

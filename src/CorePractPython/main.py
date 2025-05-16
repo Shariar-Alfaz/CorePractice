@@ -132,3 +132,15 @@ l2.print_list()  # 5 -> 9 -> 2
 result = SinglyLinkedList.sum_lists(l1.get_head(), l2.get_head())
 print("\nSum of the two lists:")
 SinglyLinkedList.print_from_node(result)  # 2 -> 1 -> 9 -> 1 (represents the number 912)
+
+l3 = SinglyLinkedList()
+l4 = SinglyLinkedList()
+l3.append_list([1, 2, 9])  # Represents the number 123
+l4.append_list([4, 5, 6])  # Represents the number 456
+print("List 3:")
+l3.print_list()  # 1 -> 2 -> 3
+print("\nList 4:")
+l4.print_list()  # 4 -> 5 -> 6
+result = SinglyLinkedList.sum_lists_forward(l3.get_head(), l4.get_head())
+print("\nSum of the two lists (forward):")
+SinglyLinkedList.print_from_node(result)  # 5 -> 7 -> 9 (represents the number 585)

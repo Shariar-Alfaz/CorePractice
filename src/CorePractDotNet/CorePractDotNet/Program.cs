@@ -89,19 +89,7 @@ Console.WriteLine(arrayAndString.IsRotation(s1, s2)); // false
 
 Console.WriteLine("LinkedList");
 SinglyLinkedList<int> list = new();
-list.Add(1);
-list.Add(2);
-list.Add(3);
-list.Add(2);
-list.Add(4);
-list.Add(3);
-list.Add(5);
-list.Add(6);
-list.Add(7);
-list.Add(8);
-list.Add(9);
-list.Add(10);
-list.Add(2);
+list.Add(1, 2, 3, 4, 5, 2, 1, 3, 4, 6, 8, 1, 8, 3, 5, 6);
 list.Print();
 list.RemoveDuplicates();
 Console.WriteLine("After removing duplicates:");
