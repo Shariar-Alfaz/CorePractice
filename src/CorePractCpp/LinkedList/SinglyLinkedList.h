@@ -4,6 +4,8 @@
 
 #ifndef SINGLYLINKEDLIST_H
 #define SINGLYLINKEDLIST_H
+#include <algorithm>
+
 #include "SinglyNode.h"
 #include <iostream>
 #include <map>
@@ -166,7 +168,7 @@ namespace LinkList {
             SinglyNode<int> *dummyHead = new SinglyNode<int>(0);
             SinglyNode<int> *current = dummyHead;
             int carry = 0;
-            while (node_1 || node_2 || carry!=0) {
+            while (node_1 || node_2 || carry != 0) {
                 int sum = carry;
                 if (node_1) {
                     sum += node_1->data;
@@ -176,8 +178,39 @@ namespace LinkList {
                     sum += node_2->data;
                     node_2 = node_2->next;
                 }
-                carry = sum/10;
+                carry = sum / 10;
                 current->next = new SinglyNode<int>(sum % 10);
+                current = current->next;
+            }
+            return dummyHead->next;
+        }
+
+        //Suppose the digits are stored in forward order. Repeat the above problem.
+        static SinglyNode<int> *sum_list_forward(SinglyNode<int> *node_1, SinglyNode<int> *node_2) {
+            string node_1_data;
+            string node_2_data;
+            SinglyNode<int> *dummyHead = new SinglyNode<int>(0);
+            SinglyNode<int> *current = dummyHead;
+            while (node_1 || node_2) {
+                if (node_1) {
+                    node_1_data += to_string(node_1->data);
+                    node_1 = node_1->next;
+                }
+                if (node_2) {
+                    node_2_data += to_string(node_2->data);
+                    node_2 = node_2->next;
+                }
+            }
+            int sum = stoi(node_1_data) + stoi(node_2_data);
+            vector<int> result;
+            while (sum > 0) {
+                result.push_back(sum % 10);
+                sum /= 10;
+            }
+
+           reverse(result.begin(), result.end());
+            for (int i : result) {
+                current->next = new SinglyNode<int>(i);
                 current = current->next;
             }
             return dummyHead->next;

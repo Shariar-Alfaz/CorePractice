@@ -1,5 +1,6 @@
 package LinkedList;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -156,6 +157,36 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             }
             carry = sum / 10;
             current.next = new SinglyNode<>(sum % 10);
+            current = current.next;
+        }
+        return dummy.next;
+    }
+
+    //Suppose the digits are stored in forward order. Repeat the above problem.
+    public static SinglyNode<Integer> getForwordSum(SinglyNode<Integer> n1, SinglyNode<Integer> n2) {
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        SinglyNode<Integer> dummy = new SinglyNode<>(0);
+        SinglyNode<Integer> current = dummy;
+        while (n1 != null || n2 != null) {
+            if (n1 != null) {
+                sb1.append(n1.data);
+                n1 = n1.next;
+            }
+            if (n2 != null) {
+                sb2.append(n2.data);
+                n2 = n2.next;
+            }
+        }
+        int sum = Integer.parseInt(sb1.toString()) + Integer.parseInt(sb2.toString());
+        List<Integer> result = new ArrayList<>();
+        while (sum > 0) {
+            result.add(sum % 10);
+            sum /= 10;
+        }
+        result = result.reversed();
+        for(int i : result) {
+            current.next = new SinglyNode<>(i);
             current = current.next;
         }
         return dummy.next;

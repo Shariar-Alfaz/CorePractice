@@ -1,4 +1,6 @@
-﻿namespace LinkedList
+﻿using System.Text;
+
+namespace LinkedList
 {
     public class SinglyLinkedList<T> where T : IComparable<T>
     {
@@ -211,6 +213,43 @@
                 }
                 head = head.Next;
             }
+        }
+
+        //Suppose the digits are stored in forward order. Repeat the above problem.
+        public static SinglyNode<int> SumListForward(SinglyNode<int> l1, SinglyNode<int> l2)
+        {
+            StringBuilder sb1 = new();
+            StringBuilder sb2 = new();
+            SinglyNode<int> dummy = new(0);
+            var current = dummy;
+            while(l1!=null || l2 != null)
+            {
+                if (l1 != null)
+                {
+                    sb1.Append(l1.Data);
+                    l1 = l1.Next;
+                }
+                if (l2 != null)
+                {
+                    sb2.Append(l2.Data);
+                    l2 = l2.Next;
+                }
+            }
+
+            int sum = int.Parse(sb1.ToString()) + int.Parse(sb2.ToString());
+            List<int> digits = new();
+            while (sum > 0)
+            {
+                digits.Add(sum % 10);
+                sum /= 10;
+            }
+            digits.Reverse();
+            foreach (var digit in digits)
+            {
+                current.Next = new SinglyNode<int>(digit);
+                current = current.Next;
+            }
+            return dummy.Next;
         }
     }
 }

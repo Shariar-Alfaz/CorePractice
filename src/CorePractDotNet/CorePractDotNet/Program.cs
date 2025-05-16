@@ -137,6 +137,14 @@ list2.Print();
 Console.WriteLine("Sum of two lists:");
 SinglyLinkedList<int>.PrintFromHead(SinglyLinkedList<int>.SumList(list1.GetHead(), list2.GetHead()));
 
+//forward
 
-
+SinglyLinkedList<int> f1 = new();
+f1.Add(7, 1, 5, 6, 1, 8, 9);
+f1.Print();
+SinglyLinkedList<int> f2 = new();
+f2.Add(5, 9, 2);
+f2.Print();
+Console.WriteLine("Sum of two lists:");
+SinglyLinkedList<int>.PrintFromHead(SinglyLinkedList<int>.SumListForward(f1.GetHead(), f2.GetHead()));
 #endregion

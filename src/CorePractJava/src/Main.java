@@ -107,5 +107,14 @@ public class Main {
         System.out.println("Sum");
         SinglyLinkedList.printFromHead(SinglyLinkedList.getSum(s1.getHead(), s2.getHead()));
 
+        var s3 = new SinglyLinkedList<Integer>();
+        s3.add(Arrays.asList(4, 6, 2, 4, 8, 1, 3, 0, 9));
+        s3.display();
+        var s4 = new SinglyLinkedList<Integer>();
+        s4.add(Arrays.asList(4, 6, 2, 4, 8, 1, 3, 0, 9));
+        s4.display();
+        System.out.println("Forword Sum:");
+        SinglyLinkedList.printFromHead(singlyLinkedList.getForwordSum(s1.getHead(), s2.getHead()));
+
     }
 }

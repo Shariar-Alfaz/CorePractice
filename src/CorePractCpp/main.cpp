@@ -105,5 +105,15 @@ int main() {
     f2.display();
     cout <<"Sum:" << endl;
     f1.printFromHead(SinglyLinkedList<int>::sum_list(f1.getHead(),f2.getHead()));
+
+
+    SinglyLinkedList<int> f3;
+    f3.insert({2, 3, 5, 2, 1, 8, 9, 1});
+    f3.display();
+    SinglyLinkedList<int> f4;
+    f4.insert({2, 3, 5, 2, 1, 8, 9, 1});
+    f4.display();
+    cout<<"forword sum"<<endl;
+    f1.printFromHead(SinglyLinkedList<int>::sum_list_forward(f3.getHead(),f4.getHead()));
     return 0;
 }
