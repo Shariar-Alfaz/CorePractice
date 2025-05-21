@@ -34,6 +34,30 @@ namespace LinkedList
             }
         }
 
+        public int Length()
+        {
+            int count = 0;
+            var current = Head;
+            while (current != null)
+            {
+                ++count;
+                current = current.Next;
+            }
+            return count;
+        }
+
+        public static int Length(SinglyNode<T> node)
+        {
+            int count = 0;
+            var current = Head;
+            while (current != null)
+            {
+                ++count;
+                current = current.Next;
+            }
+            return count;
+        }
+
         public void Print()
         {
             var current = Head;
@@ -178,7 +202,7 @@ namespace LinkedList
             SinglyNode<int> dummyHead = new(0);
             var current = dummyHead;
             int carry = 0;
-            while(l1 != null || l2 != null || carry != 0)
+            while (l1 != null || l2 != null || carry != 0)
             {
                 int sum = carry;
                 if (l1 != null)
@@ -222,7 +246,7 @@ namespace LinkedList
             StringBuilder sb2 = new();
             SinglyNode<int> dummy = new(0);
             var current = dummy;
-            while(l1!=null || l2 != null)
+            while (l1 != null || l2 != null)
             {
                 if (l1 != null)
                 {
@@ -250,6 +274,55 @@ namespace LinkedList
                 current = current.Next;
             }
             return dummy.Next;
+        }
+
+        // Intersection: Given two (singly) linked lists, determine if the two lists intersect. Return the intersecting
+        // node. Note that the intersection is defined based on reference, not value. That is, if the kth
+        // node of the first linked list is the exact same node (by reference) as the jth node of the second
+        // linked list, then they are intersecting.
+        public static SinglyNode<T>? GetIntersection(SinglyNode<T> head1, SinglyNode<T> head2)
+        {
+            int length1 = Length(head1);
+            int length2 = Length(head2);
+            int diff = Math.Abs(length1 - length2);
+            if (length1 > length2)
+                for (int i = 0; i < diff; i++) head1 = head1.Next;
+            else
+                for (int i = 0; i < diff; i++) head2 = head2.Next;
+            while (head1 != null && head2 != null)
+            {
+                if (head1 == head2) return head1;
+                head1 = head1.Next;
+                head2 = head2.Next;
+            }
+            return null; // No intersection
+        }
+
+        // Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the
+        // beginning of the loop.
+        // DEFINITION
+        // Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so
+        // as to make a loop in the linked list.
+        public static SinglyNode<T> GetLoopStart(SinglyNode<T> singlyNode)
+        {
+            var slow = singlyNode;
+            var fast = singlyNode;
+            // Find the meeting point
+            while (fast != null && fast.Next != null)
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+                if (slow == fast) break;
+            }
+            if (fast == null || fast.Next == null) return null; // No loop
+            // Move slow to head and keep fast at meeting point
+            slow = singlyNode;
+            while (slow != fast)
+            {
+                slow = slow.Next;
+                fast = fast.Next;
+            }
+            return slow; // Start of loop
         }
     }
 }

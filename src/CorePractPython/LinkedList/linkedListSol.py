@@ -24,6 +24,23 @@ class SinglyLinkedList:
         for i in data:
             self.append(i)
 
+    def size(self):
+        count = 0
+        current = self.head
+        while current:
+            count += 1
+            current = current.next
+        return count
+
+    @staticmethod
+    def size_by_node(self, node:SinglyNode):
+        count = 0
+        current = node
+        while current:
+            count += 1
+            current = current.next
+        return count
+
     def print_list(self):
         current_node = self.head
         while current_node:
@@ -163,4 +180,61 @@ class SinglyLinkedList:
             current.next = SinglyNode(i)
             current = current.next
         return dummy_head.next
+
+    # // Intersection: Given
+    # two(singly)
+    # linked
+    # lists, determine if the
+    # two
+    # lists
+    # intersect.Return
+    # the
+    # intersecting // node.Note
+    # that
+    # the
+    # intersection is defined
+    # based
+    # on reference, not value.That is,if the kth
+    # // node of the first linked list is the exact same node (by reference) as the jth node of the second // linked list, then they are intersecting.
+
+    @staticmethod
+    def get_insertion_point(self, node_1:SinglyNode, node_2:SinglyNode)-> SinglyNode | None:
+        len1 = self.get_length(node_1)
+        len2 = self.get_length(node_2)
+        diff = abs(len1 - len2)
+        if len1 >len2:
+            for i in range(diff):
+                node_1 = node_1.next
+        else:
+            for i in range(diff):
+                node_2 = node_2.next
+
+        while node_1 and node_2:
+            if node_1 == node_2:
+                return node_1
+        return None
+
+    @staticmethod
+    def get_loop_head(self,head:SinglyNode)-> SinglyNode | None:
+        slow = head
+        fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                break
+
+        if fast is None or fast.next is None:
+            return None
+
+        slow = head
+        while fast != slow:
+            fast = fast.next
+            slow = slow.next
+        return slow
+
+
+
+
+
         

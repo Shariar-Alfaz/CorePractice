@@ -65,6 +65,26 @@ namespace LinkList {
             }
         }
 
+        int length() {
+            int length = 0;
+            auto *temp = head;
+            while (temp) {
+                ++length;
+                temp = temp->next;
+            }
+            return length;
+        }
+
+        static int length(SinglyNode<T> *node) {
+            int length = 0;
+            auto *temp = node;
+            while (temp) {
+                ++length;
+                temp = temp->next;
+            }
+            return length;
+        }
+
         //R􀂧mov􀂧 Dups! Write code to remove duplicates from an unsorted linked list.
         // FOLLOW UP
         // How would you solve this problem if a temporary buffer is not allowed?
@@ -208,12 +228,61 @@ namespace LinkList {
                 sum /= 10;
             }
 
-           reverse(result.begin(), result.end());
-            for (int i : result) {
+            reverse(result.begin(), result.end());
+            for (int i: result) {
                 current->next = new SinglyNode<int>(i);
                 current = current->next;
             }
             return dummyHead->next;
+        }
+
+        // Intersection: Given two (singly) linked lists, determine if the two lists intersect. Return the intersecting
+        // node. Note that the intersection is defined based on reference, not value. That is, if the kth
+        // node of the first linked list is the exact same node (by reference) as the jth node of the second
+        // linked list, then they are intersecting.
+        static SinglyNode<T> *check_intersection(SinglyNode<T> *node_1, SinglyNode<T> *node_2) {
+            int length1 = length(node_1);
+            int length2 = length(node_2);
+            int diff = abs(length1 - length2);
+            if (length1 > length2) {
+                for (int i = 0; i < diff; i++) node_1 = node_1->next;
+            } else {
+                for (int i = 0; i < diff; i++) node_2 = node_2->next;
+            }
+
+            while (node_1 && node_2) {
+                if (node_1 == node_2) {
+                    return node_1;
+                }
+                node_1 = node_1->next;
+                node_2 = node_2->next;
+            }
+            return nullptr;
+        }
+
+        // Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the
+        // beginning of the loop.
+        // DEFINITION
+        // Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so
+        // as to make a loop in the linked list.
+        static SinglyNode<T> *get_loop_start(SinglyNode<T> *node) {
+            auto slow = node;
+            auto fast  = node;
+            while (fast && fast->next) {
+                slow = slow->next;
+                fast = fast->next->next;
+                if (slow == fast)
+                    break;
+            }
+
+            if (fast == nullptr || fast->next == nullptr)
+                return nullptr;
+            slow = node;
+            while (slow != fast) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            return slow;
         }
 
         ~SinglyLinkedList() {

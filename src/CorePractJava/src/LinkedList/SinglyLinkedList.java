@@ -11,6 +11,26 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         return head;
     }
 
+    public int getSize() {
+        int size = 0;
+        var temp = head;
+        while (temp != null) {
+            ++size;
+            temp = temp.next;
+        }
+        return size;
+    }
+
+    public static <K> int getSize(SinglyNode<K> node) {
+        int size = 0;
+        var temp = node;
+        while (temp != null) {
+            ++size;
+            temp = temp.next;
+        }
+        return size;
+    }
+
     public SinglyLinkedList() {
         this.head = null;
     }
@@ -185,7 +205,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             sum /= 10;
         }
         result = result.reversed();
-        for(int i : result) {
+        for (int i : result) {
             current.next = new SinglyNode<>(i);
             current = current.next;
         }
@@ -201,6 +221,56 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             }
             head = head.next;
         }
+    }
+
+    // Intersection: Given two (singly) linked lists, determine if the two lists intersect. Return the intersecting
+    // node. Note that the intersection is defined based on reference, not value. That is, if the kth
+    // node of the first linked list is the exact same node (by reference) as the jth node of the second
+    // linked list, then they are intersecting.
+    public static <T> SinglyNode<T> checkIntersection(SinglyNode<T> node1, SinglyNode<T> node2) {
+        int len1 = getSize(node1);
+        int len2 = getSize(node2);
+        int diff = Math.abs(len1 - len2);
+        if (len1 > len2)
+            for (int i = 0; i < diff; i++) node1 = node1.next;
+        else
+            for (int i = 0; i < diff; i++) node2 = node2.next;
+
+        while (node1 != null && node2 != null) {
+            if (node1.data == node2.data) {
+                return node1;
+            }
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        return null;
+    }
+
+    // Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the
+    // beginning of the loop.
+    // DEFINITION
+    // Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so
+    // as to make a loop in the linked list.
+    public static <T> SinglyNode<T> getLoopStart(SinglyNode<T> head) {
+        var slow = head;
+        var fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow)
+                break;
+        }
+
+        if (fast == null || fast.next == null)
+            return null;
+
+        slow = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 
 }
