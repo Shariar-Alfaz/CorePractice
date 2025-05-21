@@ -49,7 +49,7 @@ namespace LinkedList
         public static int Length(SinglyNode<T> node)
         {
             int count = 0;
-            var current = Head;
+            var current = node;
             while (current != null)
             {
                 ++count;

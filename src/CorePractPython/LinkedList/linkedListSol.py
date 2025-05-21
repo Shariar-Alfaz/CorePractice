@@ -104,7 +104,7 @@ class SinglyLinkedList:
         while current:
             next_node = current.next
             current.next = None
-            if(current.data < x):
+            if current.data < x:
                 if before_head is None:
                     before_head = current
                     before_end = before_head
